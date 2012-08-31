@@ -5,30 +5,33 @@
 @prefix extension: <http://ns.ontowiki.net/Extensions/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix event: <http://ns.ontowiki.net/SysOnt/Events/> .
-@prefix : <https://github.com/AKSW/lastmodified.ontowiki/raw/master/doap.n3#> .
+@prefix : <https://github.com/AKSW/dcterms.ontowiki/raw/master/doap.n3#> .
 
+# basic information
 <> foaf:primaryTopic :this .
 :this a doap:Project ;
-  doap:name "lastmodified" ;
-  owconfig:privateNamespace <https://github.com/AKSW/lastmodified.ontowiki/raw/master/doap.n3#> ;
-  owconfig:templates "templates" ;
-  owconfig:enabled "true"^^xsd:boolean ;
-  rdfs:label "LastModified Plugin" ;
-  doap:description "while changing resources, additional information such as lastmodified are written automatically." ;
-  owconfig:authorLabel "AKSW" ;
-  doap:maintainer <http://aksw.org> ;
-  owconfig:pluginEvent event:onAddStatement ;
-  owconfig:pluginEvent event:onAddMultipleStatements ;
-  owconfig:pluginEvent event:onDeleteMultipleStatements .
+    doap:name "dcterms" ;
+    owconfig:privateNamespace <https://github.com/AKSW/dcterms.ontowiki/raw/master/doap.n3#> ;
+    owconfig:templates "templates" ;
+    owconfig:enabled "true"^^xsd:boolean ;
+    rdfs:label "Dublin Core Support" ;
+    doap:description "Supports usage and creation of various Dublin Core terms incl. automatic creation properties such as modified, contributor and creator" ;
+    owconfig:authorLabel "AKSW" ;
+    doap:maintainer <http://aksw.org> ;
+    owconfig:pluginEvent
+        event:onAddStatement ,
+        event:onAddMultipleStatements,
+        event:onDeleteMultipleStatements .
 
 # config
 :this 
-  :creator <http://purl.org/dc/terms/creator> ;
-  :creationDate <http://purl.org/dc/terms/created> ;
-  :contributor <http://purl.org/dc/terms/contributor> ;
-  :modified <http://purl.org/dc/terms/modified> .
+    :creator <http://purl.org/dc/terms/creator> ;
+    :creationDate <http://purl.org/dc/terms/created> ;
+    :contributor <http://purl.org/dc/terms/contributor> ;
+    :modified <http://purl.org/dc/terms/modified> .
 
 # release
-:this doap:release :v1-0 .
-:v1-0 a doap:Version ;
-  doap:revision "1.0" .
+:this doap:release :v0-1 .
+:v0-1 a doap:Version ;
+    doap:revision "0.1" .
+

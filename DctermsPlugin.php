@@ -7,15 +7,14 @@
  */
 
 /**
- * The pingback plugin is used on different events
+ * Dublic Core extension plugin
  *
- * @category   OntoWiki
- * @package    Extensions_Pingback
- * @author     Philipp Frischmuth
- * @author     Sebastian Tramp <mail@sebastian.tramp.name>
+ * @category ontowiki
+ * @package  ontowiki_extensions_dcterms
+ * @author   Michael Martin
+ * @author   {@link http://sebastian.tramp.name Sebastian Tramp}
  */
-
-class LastmodifiedPlugin extends OntoWiki_Plugin
+class DctermsPlugin extends OntoWiki_Plugin
 {
     public function onAddStatement($event)
     {
@@ -70,7 +69,7 @@ var_dump($statements, count($statements));die;
         $currentDate = date("Y-m-d");
         $newResource = clone $resource;
         if ($isNewResource) {
-            #add creation entries 
+            #add creation entries
             $newResource->addRelation($s, $this->_privateConfig->creator, $user->getUri());
             $newResource->addAttribute($s, $this->_privateConfig->creationDate, $currentDate , null, "http://www.w3.org/2001/XMLSchema#date");
         } else {
@@ -85,31 +84,29 @@ var_dump($statements, count($statements));die;
 
         }
         $model->updateWithMutualDifference($resource->getStatements(), $newResource->getStatements());
-        
-    
     }
 
     protected function _logError($msg)
     {
         if (is_array($msg)) {
-            $this->_log('LastModified Plugin Error - ' . var_export($msg, true));
+            $this->_log('dcterms Plugin Error - ' . var_export($msg, true));
         } else {
-            $this->_log('LastModified Plugin Error - ' . $msg);
+            $this->_log('dcterms Plugin Error - ' . $msg);
         }
     }
 
     protected function _logInfo($msg)
     {
         if (is_array($msg)) {
-            $this->_log('LastModified Plugin Info - ' . var_export($msg, true));
+            $this->_log('dcterms Plugin Info - ' . var_export($msg, true));
         } else {
-            $this->_log('LastModified Plugin Info - ' . $msg);
+            $this->_log('dcterms Plugin Info - ' . $msg);
         }
     }
 
     private function _log($msg)
     {
-        $logger = OntoWiki::getInstance()->getCustomLogger('lastmodified_plugin');
+        $logger = OntoWiki::getInstance()->getCustomLogger('dcterms_plugin');
         $logger->debug($msg);
     }
 
